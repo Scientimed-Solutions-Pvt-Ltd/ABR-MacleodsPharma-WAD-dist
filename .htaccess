@@ -1,6 +1,10 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # Return admin-managed metadata in the initial HTML for WhatsApp and other
+  # crawlers. The React app still handles all client-side routes after load.
+  RewriteRule ^$ index.php [L]
   
   # Handle Authorization Header
   RewriteCond %{HTTP:Authorization} .
@@ -11,7 +15,7 @@
   RewriteCond %{REQUEST_FILENAME} !-d
   
   # Rewrite everything else to index.html to allow HTML5 state links
-  RewriteRule . index.html [L]
+  RewriteRule . index.php [L]
 </IfModule>
 
 # Security Headers
